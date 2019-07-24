@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 
 class Home extends Component {
   render() {
     return (
       <View>
-        <Text>Login into applicatio</Text>
+        <Text>Home Page</Text>
       </View>
     );
   }
 }
 
 export default Home;
+//npm install react-native-gesture-handler --save
