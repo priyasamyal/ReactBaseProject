@@ -1,24 +1,24 @@
 import Home from "./app/components/Home";
+import DashBoard from "./app/components/Dashboard";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import React, { Component } from "react";
-import { View, Text } from "react-native";
 
-class DetailsScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Details Screen</Text>
-      </View>
-    );
-  }
-}
 const RootStack = createStackNavigator(
   {
     home: Home,
-    detail: DetailsScreen
+    dashboard: DashBoard
   },
   {
-    initialRouteName: "detail"
+    initialRouteName: "home",
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: "#f4511e"
+      },
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        fontWeight: "bold"
+      }
+    }
   }
 );
 
