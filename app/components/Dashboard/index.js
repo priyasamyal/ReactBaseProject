@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { View, Text, Button } from "react-native";
 
+import { NavigationActions } from "react-navigation";
+
 class DashBoard extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -13,7 +15,12 @@ class DashBoard extends Component {
         <Text>DashBoard Page</Text>
         <Button
           title="Go to Home"
-          onPress={() => this.props.navigation.navigate("home")}
+          onPress={() =>
+            this.props.navigation.reset(
+              [NavigationActions.navigate({ routeName: "Login" })],
+              0
+            )
+          }
         />
       </View>
     );

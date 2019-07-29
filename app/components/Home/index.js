@@ -12,7 +12,7 @@ class Home extends Component {
         <Text>Home Page</Text>
         <Button
           title="Go to Details"
-          onPress={() => this.props.navigation.navigate("dashboard")}
+          onPress={() => this.props.navigation.push("dashBoard")}
         />
       </View>
     );
