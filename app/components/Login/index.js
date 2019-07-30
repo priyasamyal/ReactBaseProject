@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { View, Button, Text } from "react-native";
-
+import styles from "./styles";
 import { StackActions, NavigationActions } from "react-navigation";
 
 class Login extends Component {
   render() {
+    const { heading, input } = styles;
     return (
       <View>
-        <Text> Login Screen </Text>
+        <Text style={styles.heading}> Login Screen </Text>
         <Button
           title="Login Screen"
           onPress={() =>
