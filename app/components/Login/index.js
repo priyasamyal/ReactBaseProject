@@ -13,7 +13,7 @@ class Login extends Component {
           onPress={() =>
             this.props.navigation.reset(
               [NavigationActions.navigate({ routeName: "tabs" })],
-              1
+              0
             )
           }
         />
