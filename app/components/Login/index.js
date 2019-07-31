@@ -8,7 +8,7 @@ class Login extends Component {
     const { heading, input } = styles;
     return (
       <View>
-        <Text style={styles.heading}> Login Screen </Text>
+        <Text style={styles.heading}> Login Screen from iOS </Text>
         <Button
           title="Login Screen"
           onPress={() =>
