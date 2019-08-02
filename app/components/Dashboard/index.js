@@ -14,7 +14,7 @@ class DashBoard extends Component {
       <View>
         <Text>DashBoard Page</Text>
         <Button
-          title="Go to Home"
+          title="Go to Homee"
           onPress={() =>
             this.props.navigation.reset(
               [NavigationActions.navigate({ routeName: "Login" })],
@@ -28,4 +28,3 @@ class DashBoard extends Component {
 }
 
 export default DashBoard;
-//npm install react-native-gesture-handler --save
