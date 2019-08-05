@@ -10,7 +10,7 @@ class Login extends Component {
       <View>
         <Text style={styles.heading}> Login Screen from iOS </Text>
         <Button
-          title="Login Screen"
+          title="Login Screenn"
           onPress={() =>
             this.props.navigation.reset(
               [NavigationActions.navigate({ routeName: "tabs" })],

@@ -21,7 +21,7 @@ const RootStack = createStackNavigator(
     dashBoard: DashBoard
   },
   {
-    initialRouteName: "Login",
+    initialRouteName: "registerScreen",
     headerMode: "none"
   }
 );
