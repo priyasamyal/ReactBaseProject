@@ -3,7 +3,6 @@ import {
   View, Image, StyleSheet, TextInput, KeyboardAvoidingView, ScrollView
   , Platform,
 } from "react-native";
-
 import { Picker, Radio, Left, Text, Right, DatePicker, Container, Header, Content, ListItem, CheckBox, Body, Button } from "native-base";
 
 import MultiSelect from 'react-native-multiple-select';
