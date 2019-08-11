@@ -1,21 +1,35 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
-    Animated,
-    Platform,
-    StatusBar,
-    StyleSheet,
-    // Text,
-    View,
-    RefreshControl,
-    ScrollView,
-    Image,
-    FlatList,
-    Keyboard
-} from 'react-native';
+  Animated,
+  Platform,
+  StatusBar,
+  StyleSheet,
+  // Text,
+  View,
+  RefreshControl,
+  ScrollView,
+  Image,
+  FlatList,
+  Keyboard,
+  TextInput
+} from "react-native";
 import styles from "./styles";
-import { colors } from '../../common/index';
-import { Container, Header, Item, Input, Icon, Button, Text } from 'native-base';
-import * as Animatable from 'react-native-animatable';
+import { colors } from "../../common/index";
+import {
+  Container,
+  Header,
+  Item,
+  Input,
+  Icon,
+  Button,
+  Text,
+  Left,
+  Body,
+  Right,
+  Title,
+  Subtitle
+} from "native-base";
+import * as Animatable from "react-native-animatable";
 // const HEADER_MAX_HEIGHT = 300;
 // const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 60 : 73;
 // const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
@@ -205,167 +219,295 @@ const logo = require("../../assets/imgs/logo.png");
 // });
 
 HEADER_MAX_HEIGHT = 120;
-HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 70 : 73;
-PROFILE_IMAGE_MAX_HEIGHT = 80
-PROFILE_IMAGE_MIN_HEIGHT = 40
+HEADER_MIN_HEIGHT = Platform.OS === "ios" ? 70 : 73;
+PROFILE_IMAGE_MAX_HEIGHT = 80;
+PROFILE_IMAGE_MIN_HEIGHT = 40;
 class Animation1 extends Component {
-    constructor(props) {
-        super(props)
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            scrollY: new Animated.Value(0)
-        }
-    }
-    render() {
-        const headerHeight = this.state.scrollY.interpolate({
-            inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
-            outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
-            extrapolate: 'clamp'
-        })
-        const profileImageHeight = this.state.scrollY.interpolate({
-            inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
-            outputRange: [PROFILE_IMAGE_MAX_HEIGHT, PROFILE_IMAGE_MIN_HEIGHT],
-            extrapolate: 'clamp'
-        })
+    this.state = {
+      scrollY: new Animated.Value(0)
+    };
+  }
+  render() {
+    const headerHeight = this.state.scrollY.interpolate({
+      inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
+      outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
+      extrapolate: "clamp"
+    });
+    const profileImageHeight = this.state.scrollY.interpolate({
+      inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
+      outputRange: [PROFILE_IMAGE_MAX_HEIGHT, PROFILE_IMAGE_MIN_HEIGHT],
+      extrapolate: "clamp"
+    });
 
-        const profileImageMarginTop = this.state.scrollY.interpolate({
-            inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
-            outputRange: [HEADER_MAX_HEIGHT - (PROFILE_IMAGE_MAX_HEIGHT / 2), HEADER_MAX_HEIGHT + 5],
-            extrapolate: 'clamp'
-        })
+    const profileImageMarginTop = this.state.scrollY.interpolate({
+      inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
+      outputRange: [
+        HEADER_MAX_HEIGHT - PROFILE_IMAGE_MAX_HEIGHT / 2,
+        HEADER_MAX_HEIGHT + 5
+      ],
+      extrapolate: "clamp"
+    });
 
-        const headerZindex = this.state.scrollY.interpolate({
-            inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
-            outputRange: [0, 1],
-            extrapolate: 'clamp'
-        })
+    const headerZindex = this.state.scrollY.interpolate({
+      inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
+      outputRange: [0, 1],
+      extrapolate: "clamp"
+    });
 
-        const headerTitleBottom = this.state.scrollY.interpolate({
-            inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT,
-                HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT + 5 + PROFILE_IMAGE_MIN_HEIGHT,
-                HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT + 5 + PROFILE_IMAGE_MIN_HEIGHT + 26],
-            outputRange: [-20, -20, -20, 0],
-            extrapolate: 'clamp'
-        })
-        return (
-            <View style={{ flex: 1 }}>
-                <Animated.View style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    backgroundColor: 'lightskyblue',
-                    height: headerHeight,
-                    zIndex: headerZindex,
-                    alignItems: 'center'
-                }}>
-                    <Animated.View style={{
-                        position: "absolute",
-                        bottom: headerTitleBottom,
-                    }}>
-                        <Text style={{
-                            fontWeight: "bold",
-                            color: "white",
-                            fontSize: 14
-                        }}>
-                            Priya Kumari </Text>
+    const headerTitleBottom = this.state.scrollY.interpolate({
+      inputRange: [
+        0,
+        HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT,
+        HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT + 5 + PROFILE_IMAGE_MIN_HEIGHT,
+        HEADER_MAX_HEIGHT -
+          HEADER_MIN_HEIGHT +
+          5 +
+          PROFILE_IMAGE_MIN_HEIGHT +
+          26
+      ],
+      outputRange: [-20, -20, -20, 0],
+      extrapolate: "clamp"
+    });
+    return (
+      <View style={{ flex: 1 }}>
+        <Animated.View
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            backgroundColor: "lightskyblue",
+            height: headerHeight,
+            zIndex: headerZindex,
+            alignItems: "center"
+          }}
+        >
+          <Animated.View
+            style={{
+              position: "absolute",
+              bottom: headerTitleBottom
+            }}
+          >
+            <Text
+              style={{
+                fontWeight: "bold",
+                color: "white",
+                fontSize: 14
+              }}
+            >
+              Priya Kumari{" "}
+            </Text>
+          </Animated.View>
+        </Animated.View>
 
-
-                    </Animated.View>
-                </Animated.View>
-
-                <ScrollView style={{ flex: 1 }}
-                    scrollEventThrottle={16}
-                    onScroll={Animated.event(
-                        [{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }])}
-                >
-                    <Animated.View style={{
-                        height: profileImageHeight,
-                        width: profileImageHeight,
-                        borderRadius: PROFILE_IMAGE_MAX_HEIGHT,
-                        borderColor: 'white',
-                        borderWidth: 3,
-                        overflow: 'hidden',
-                        marginTop: profileImageMarginTop,
-                        marginLeft: 10,
-                        backgroundColor: 'gray'
-                    }}>
-                        <Image source={logo} style={{
-                            height: null,
-                            width: null,
-                            flex: 1
-                        }}></Image>
-                    </Animated.View>
-                    <View style={{ flex: 1 }}>
-                        <Text style={{ fontWeight: "bold", fontSize: 26, paddingLeft: 10 }}> Priya Kumari </Text>
-                    </View>
-                    <View style={{ height: 1000 }}>
-
-                    </View>
-                </ScrollView>
-            </View>
-        )
-    }
+        <ScrollView
+          style={{ flex: 1 }}
+          scrollEventThrottle={16}
+          onScroll={Animated.event([
+            { nativeEvent: { contentOffset: { y: this.state.scrollY } } }
+          ])}
+        >
+          <Animated.View
+            style={{
+              height: profileImageHeight,
+              width: profileImageHeight,
+              borderRadius: PROFILE_IMAGE_MAX_HEIGHT,
+              borderColor: "white",
+              borderWidth: 3,
+              overflow: "hidden",
+              marginTop: profileImageMarginTop,
+              marginLeft: 10,
+              backgroundColor: "gray"
+            }}
+          >
+            <Image
+              source={logo}
+              style={{
+                height: null,
+                width: null,
+                flex: 1
+              }}
+            />
+          </Animated.View>
+          <View style={{ flex: 1 }}>
+            <Text style={{ fontWeight: "bold", fontSize: 26, paddingLeft: 10 }}>
+              {" "}
+              Priya Kumari{" "}
+            </Text>
+          </View>
+          <View style={{ height: 1000 }} />
+        </ScrollView>
+      </View>
+    );
+  }
 }
 
-
-const listItem = ['Dev', 'hh', 'dg'];
+const listItem = [
+  "Priya",
+  "Rajanhh",
+  "Proliguc",
+  "Test",
+  "Hello",
+  "Hi",
+  "List1",
+  "Priya",
+  "Rajanhh",
+  "Proliguc",
+  "Test",
+  "Hello",
+  "Hi",
+  "List1"
+];
+SEARCH_HEADER_MAX_HEIGHT = 110;
+SEARCH_HEADER_MIN_HEIGHT = Platform.OS === "ios" ? 70 : 45;
 class Search extends Component {
-    state = {
-        searchBarFocused: false
-    }
-    componentDidMount() {
-        this.keyboardDidShow = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow)
-        this.keyboardWillShow = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow)
-        this.keyboardWillHide = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide)
+  //   state = {
+  //     searchBarFocused: false
+  //   };
+  //   componentDidMount() {
+  //     this.keyboardDidShow = Keyboard.addListener(
+  //       "keyboardDidShow",
+  //       this.keyboardDidShow
+  //     );
+  //     this.keyboardWillSho;
+  //     w = Keyboard.addListener("keyboardWillShow", this.keyboardWillShow);
+  //     this.keyboardWillHide = Keyboard.addListener(
+  //       "keyboardWillHide",
+  //       this.keyboardWillHide
+  //     );
+  //   }
+  //   keyboardDidShow = () => {
+  //     this.setState({ searchBarFocused: true });
+  //   };
+  //   keyboardWillShow = () => {
+  //     this.setState({ searchBarFocused: true });
+  //   };
+  //   keyboardWillHide = () => {
+  //     this.setState({ searchBarFocused: false });
+  //   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      scrollY: new Animated.Value(0)
+    };
+  }
+  render() {
+    const headerHeight = this.state.scrollY.interpolate({
+      inputRange: [0, SEARCH_HEADER_MAX_HEIGHT],
+      outputRange: [SEARCH_HEADER_MAX_HEIGHT, SEARCH_HEADER_MIN_HEIGHT],
+      extrapolate: "clamp"
+    });
+    return (
+      <Container>
+        <Animated.View
+          style={{
+            backgroundColor: "pink",
+            padding: 5,
+            height: headerHeight
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row"
+              //  backgroundColor: "pink"
+            }}
+          >
+            <View style={{ padding: 10 }}>
+              <Icon name="menu" />
+            </View>
+            <View
+              style={{
+                padding: 10
+              }}
+            >
+              <Text
+                style={{
+                  marginBottom: 10,
+                  fontWeight: "bold"
+                }}
+              >
+                Search
+              </Text>
+            </View>
+          </View>
+          <View>
+            <TextInput
+              style={{
+                height: 40,
+                borderWidth: 1,
+                borderColor: "black"
+              }}
+              placeholder="Type here to translate!"
+            />
+          </View>
+        </Animated.View>
+        <ScrollView
+          style={{ flex: 1 }}
+          scrollEventThrottle={16}
+          onScroll={Animated.event([
+            { nativeEvent: { contentOffset: { y: this.state.scrollY } } }
+          ])}
+        >
+          <View>
+            <Text>Hello1</Text>
+            <FlatList
+              data={listItem}
+              renderItem={({ item }) => (
+                <Text style={{ padding: 20, fontSize: 20 }}> {item} </Text>
+              )}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          </View>
+        </ScrollView>
+        {/* <Header searchBar rounded style={{ backgroundColor: "#c45653" }}>
+          <Animatable.View
+            animation="slideInRight"
+            duration={500}
+            style={{
+              backgroundColor: "white",
+              flexDirection: "row",
+              padding: 5,
+              alignItems: "center",
+              flex: 1
+            }}
+          >
+            <Animatable.View
+              animation={
+                this.state.searchBarFocused ? "fadeInLeft" : "fadeInRight"
+              }
+              duration={400}
+            >
+              <Icon
+                style={{ paddingLeft: 15 }}
+                name={this.state.searchBarFocused ? "ios-arrow-back" : "search"}
+              />
+            </Animatable.View>
+            <Input
+              style={{ paddingLeft: 15 }}
+              placeholder="Enter your name"
+              placeholderTextColor={colors.GREY_BORDER}
+            />
+          </Animatable.View>
+        </Header>
 
-    }
-    keyboardDidShow = () => {
-        this.setState({ searchBarFocused: true })
-    }
-    keyboardWillShow = () => {
-        this.setState({ searchBarFocused: true })
-
-    }
-    keyboardWillHide = () => {
-        this.setState({ searchBarFocused: false })
-    }
-
-    render() {
-        return (
-            <Container>
-                <Header searchBar rounded style={{ backgroundColor: '#c45653' }}>
-                    <Animatable.View animation="slideInRight" duration={500}
-                        style={{ backgroundColor: 'white', flexDirection: 'row', padding: 5, alignItems: 'center', flex: 1 }}>
-                        <Animatable.View animation={this.state.searchBarFocused ? "fadeInLeft" : "fadeInRight"} duration={400}>
-                            <Icon style={{ paddingLeft: 15 }} name={this.state.searchBarFocused ? "ios-arrow-back" : "search"} />
-                        </Animatable.View>
-                        <Input style={{ paddingLeft: 15 }} placeholder='Enter your name' placeholderTextColor={colors.GREY_BORDER} />
-                    </Animatable.View>
-                </Header>
-
-                <FlatList
-                    style={{ backgroundColor: this.state.searchBarFocused ? 'rgba(0,0,0,0.3)' : 'white' }}
-                    data={listItem}
-                    renderItem={({ item }) =>
-                        <Text style={{ padding: 20, fontSize: 20 }}> {item} </Text>
-                    }
-                    keyExtractor={(item, index) => index.toString()}
-
-                />
-
-
-            </Container >
-            // <View style={{ flex: 1 }}>
-            //     <View style={{ height: 80, backgroundColor: '#c45653', justifyContent: 'center', paddingHorizontal: 5 }}>
-            //         <View style={{ height: 50, backgroundColor: 'white' }}>
-
-            //         </View>
-            //     </View>
-
-            // </View>
-        )
-    }
+        <FlatList
+          style={{
+            backgroundColor: this.state.searchBarFocused
+              ? "rgba(0,0,0,0.3)"
+              : "white"
+          }}
+          data={listItem}
+          renderItem={({ item }) => (
+            <Text style={{ padding: 20, fontSize: 20 }}> {item} </Text>
+          )}
+          keyExtractor={(item, index) => index.toString()}
+        /> */}
+      </Container>
+    );
+  }
 }
 
 export default Search;
