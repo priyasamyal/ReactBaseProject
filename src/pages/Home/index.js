@@ -8,7 +8,11 @@ import styles from "./styles";
 
 const profile_img = require("../../assets/imgs/dp.png");
 
+
 class Home extends Component {
+  goToPage = (page_name) => {
+    this.props.navigation.navigate(page_name);
+  }
   static navigationOptions = {
     title: "Home"
   };
@@ -48,7 +52,7 @@ class Home extends Component {
             <Separator bordered>
               <Text>List with Avatar</Text>
             </Separator>
-            <ListItem avatar>
+            <ListItem avatar onPress={() => this.goToPage('search')}>
               <Left>
                 <Thumbnail source={profile_img} />
               </Left>
@@ -65,7 +69,7 @@ class Home extends Component {
               <Text>List with Thumbnail</Text>
             </Separator>
 
-            <ListItem thumbnail>
+            <ListItem thumbnail onPress={() => this.goToPage('details')}>
               <Left>
                 <Thumbnail square source={profile_img} style={{ backgroundColor: colors.GREY_BORDER }} />
               </Left>
@@ -75,7 +79,7 @@ class Home extends Component {
               </Body>
               <Right>
                 <Button transparent>
-                  <Text>View</Text>
+                  <Text> Details</Text>
                 </Button>
               </Right>
             </ListItem>

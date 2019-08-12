@@ -11,7 +11,8 @@ import {
   Image,
   FlatList,
   Keyboard,
-  TextInput
+  TextInput,
+  TouchableOpacity
 } from "react-native";
 import styles from "./styles";
 import { colors } from "../../common/index";
@@ -27,7 +28,8 @@ import {
   Body,
   Right,
   Title,
-  Subtitle
+  Subtitle,
+  List, ListItem
 } from "native-base";
 import * as Animatable from "react-native-animatable";
 // const HEADER_MAX_HEIGHT = 300;
@@ -218,152 +220,35 @@ const logo = require("../../assets/imgs/logo.png");
 //     },
 // });
 
-HEADER_MAX_HEIGHT = 120;
-HEADER_MIN_HEIGHT = Platform.OS === "ios" ? 70 : 73;
-PROFILE_IMAGE_MAX_HEIGHT = 80;
-PROFILE_IMAGE_MIN_HEIGHT = 40;
-class Animation1 extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      scrollY: new Animated.Value(0)
-    };
-  }
-  render() {
-    const headerHeight = this.state.scrollY.interpolate({
-      inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
-      outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
-      extrapolate: "clamp"
-    });
-    const profileImageHeight = this.state.scrollY.interpolate({
-      inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
-      outputRange: [PROFILE_IMAGE_MAX_HEIGHT, PROFILE_IMAGE_MIN_HEIGHT],
-      extrapolate: "clamp"
-    });
-
-    const profileImageMarginTop = this.state.scrollY.interpolate({
-      inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
-      outputRange: [
-        HEADER_MAX_HEIGHT - PROFILE_IMAGE_MAX_HEIGHT / 2,
-        HEADER_MAX_HEIGHT + 5
-      ],
-      extrapolate: "clamp"
-    });
-
-    const headerZindex = this.state.scrollY.interpolate({
-      inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
-      outputRange: [0, 1],
-      extrapolate: "clamp"
-    });
-
-    const headerTitleBottom = this.state.scrollY.interpolate({
-      inputRange: [
-        0,
-        HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT,
-        HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT + 5 + PROFILE_IMAGE_MIN_HEIGHT,
-        HEADER_MAX_HEIGHT -
-          HEADER_MIN_HEIGHT +
-          5 +
-          PROFILE_IMAGE_MIN_HEIGHT +
-          26
-      ],
-      outputRange: [-20, -20, -20, 0],
-      extrapolate: "clamp"
-    });
-    return (
-      <View style={{ flex: 1 }}>
-        <Animated.View
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            backgroundColor: "lightskyblue",
-            height: headerHeight,
-            zIndex: headerZindex,
-            alignItems: "center"
-          }}
-        >
-          <Animated.View
-            style={{
-              position: "absolute",
-              bottom: headerTitleBottom
-            }}
-          >
-            <Text
-              style={{
-                fontWeight: "bold",
-                color: "white",
-                fontSize: 14
-              }}
-            >
-              Priya Kumari{" "}
-            </Text>
-          </Animated.View>
-        </Animated.View>
-
-        <ScrollView
-          style={{ flex: 1 }}
-          scrollEventThrottle={16}
-          onScroll={Animated.event([
-            { nativeEvent: { contentOffset: { y: this.state.scrollY } } }
-          ])}
-        >
-          <Animated.View
-            style={{
-              height: profileImageHeight,
-              width: profileImageHeight,
-              borderRadius: PROFILE_IMAGE_MAX_HEIGHT,
-              borderColor: "white",
-              borderWidth: 3,
-              overflow: "hidden",
-              marginTop: profileImageMarginTop,
-              marginLeft: 10,
-              backgroundColor: "gray"
-            }}
-          >
-            <Image
-              source={logo}
-              style={{
-                height: null,
-                width: null,
-                flex: 1
-              }}
-            />
-          </Animated.View>
-          <View style={{ flex: 1 }}>
-            <Text style={{ fontWeight: "bold", fontSize: 26, paddingLeft: 10 }}>
-              {" "}
-              Priya Kumari{" "}
-            </Text>
-          </View>
-          <View style={{ height: 1000 }} />
-        </ScrollView>
-      </View>
-    );
-  }
-}
-
 const listItem = [
-  "Priya",
-  "Rajanhh",
-  "Proliguc",
-  "Test",
-  "Hello",
-  "Hi",
-  "List1",
-  "Priya",
-  "Rajanhh",
-  "Proliguc",
-  "Test",
-  "Hello",
-  "Hi",
-  "List1"
+  "Mark",
+  "Keith",
+  "Specncer",
+  "Harvey",
+  "Tom Riddle",
+  "Harry Potter",
+  "Pown Wiesly",
+  "Harmonie",
+  "McGonagal",
+  "Dumbeldore",
+  "Snake",
+  "Jack Sparrow",
+  "Juliet",
+  "Romeo"
 ];
-SEARCH_HEADER_MAX_HEIGHT = 110;
-SEARCH_HEADER_MIN_HEIGHT = Platform.OS === "ios" ? 70 : 45;
+SEARCH_HEADER_MAX_HEIGHT = Platform.OS === "ios" ? 145 : 110;
+SEARCH_HEADER_MIN_HEIGHT = Platform.OS === "ios" ? 90 : 45;
 class Search extends Component {
+  static navigationOptions = {
+    title: "Home",
+    headerStyle: {
+      backgroundColor: "#03A9F4"
+    },
+    headerTintColor: "#fff",
+    headerTitleStyle: {
+      fontWeight: "bold"
+    }
+  }
   //   state = {
   //     searchBarFocused: false
   //   };
@@ -394,55 +279,150 @@ class Search extends Component {
       scrollY: new Animated.Value(0)
     };
   }
+
+  goBack = () => {
+    this.props.navigation.goBack();
+    // this.props.navigation.navigate("search");
+  }
   render() {
     const headerHeight = this.state.scrollY.interpolate({
-      inputRange: [0, SEARCH_HEADER_MAX_HEIGHT],
-      outputRange: [SEARCH_HEADER_MAX_HEIGHT, SEARCH_HEADER_MIN_HEIGHT],
+      inputRange: [0, SEARCH_HEADER_MAX_HEIGHT - SEARCH_HEADER_MIN_HEIGHT, SEARCH_HEADER_MAX_HEIGHT],
+      outputRange: [SEARCH_HEADER_MAX_HEIGHT, SEARCH_HEADER_MAX_HEIGHT, SEARCH_HEADER_MIN_HEIGHT],
+      extrapolate: "clamp"
+    });
+
+    const textOpacity = this.state.scrollY.interpolate({
+      inputRange: [0, SEARCH_HEADER_MAX_HEIGHT - SEARCH_HEADER_MIN_HEIGHT, SEARCH_HEADER_MIN_HEIGHT],
+      outputRange: [1, 1, 0],
+      extrapolate: "clamp"
+    });
+    const mainSearchOpacity = this.state.scrollY.interpolate({
+      inputRange: [0, SEARCH_HEADER_MAX_HEIGHT - SEARCH_HEADER_MIN_HEIGHT, SEARCH_HEADER_MIN_HEIGHT],
+      outputRange: [0, 0, 1],
+      extrapolate: "clamp"
+    });
+
+    const searchTextDisplay = this.state.scrollY.interpolate({
+      inputRange: [0, SEARCH_HEADER_MAX_HEIGHT - SEARCH_HEADER_MIN_HEIGHT, SEARCH_HEADER_MIN_HEIGHT],
+      outputRange: [1, 1, 0],
+
       extrapolate: "clamp"
     });
     return (
-      <Container>
+      <Container >
         <Animated.View
           style={{
-            backgroundColor: "pink",
+            backgroundColor: 'rgb(249, 249, 249)',
+            paddingTop: 10,
             padding: 5,
-            height: headerHeight
+            height: headerHeight,
+            borderWidth: 0.2,
+            borderColor: '#5c5c5c'
           }}
         >
           <View
             style={{
-              flexDirection: "row"
-              //  backgroundColor: "pink"
+              flexDirection: "row",
+              marginTop: Platform.OS === "ios" ? 25 : 15
             }}
           >
-            <View style={{ padding: 10 }}>
-              <Icon name="menu" />
-            </View>
-            <View
+            <TouchableOpacity onPress={() => this.goBack()}>
+              <View style={{ paddingRight: 10, paddingLeft: 10, paddingTop: 10, paddingBottom: 10 }}>
+                <Icon ios='ios-arrow-back' android="md-arrow-back" style={{ fontSize: 35, color: 'rgb(0, 122, 255)' }} />
+              </View>
+            </TouchableOpacity>
+
+            <Animated.View
               style={{
-                padding: 10
+                transform: [
+                  { scale: searchTextDisplay },
+                  { translateY: 1 },
+                ],
               }}
             >
-              <Text
+              <Animated.Text
                 style={{
-                  marginBottom: 10,
-                  fontWeight: "bold"
+                  fontSize: 20,
+                  fontWeight: "bold",
+                  marginTop: 14,
+                  marginLeft: 6,
+                  width: 100
                 }}
               >
                 Search
-              </Text>
-            </View>
+              </Animated.Text>
+
+
+            </Animated.View>
+            <Animated.View style={{
+              flexDirection: 'row',
+              marginLeft: -100,
+              opacity: mainSearchOpacity,
+              flex: 1,
+              height: 40,
+              marginTop: 5,
+              alignItems: 'center',
+              transform: [
+                { scale: mainSearchOpacity },
+                { translateY: 1 },
+
+              ],
+            }}>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  borderWidth: 1,
+                  borderRadius: 5,
+                  height: 40,
+                  backgroundColor: '#e0e0e1',
+                  borderColor: "#e0e0e1",
+
+                }}>
+                <Icon name="search" style={{ marginTop: 5, marginLeft: 8, fontSize: 23, color: '#5c5c5c' }} />
+                <TextInput
+                  style={{
+                    paddingLeft: 8,
+                    margin: 0,
+                    fontSize: 18
+                  }}
+                  placeholder="Search"
+                  placeholderTextColor="#5c5c5c"
+                />
+              </View>
+
+              <TouchableOpacity style={{ alignItems: 'center' }}>
+                <Text style={{ color: 'rgb(0, 122, 255)', fontSize: 15, alignContent: 'center', padding: 2 }}>Cancel</Text>
+              </TouchableOpacity>
+            </Animated.View>
+
           </View>
-          <View>
+          <Animated.View style={{
+            flexDirection: 'row',
+            marginLeft: 5,
+            marginRight: 5,
+            borderRadius: 5,
+            opacity: textOpacity,
+            borderWidth: 1,
+            backgroundColor: '#e0e0e1',
+            borderColor: "#e0e0e1",
+            transform: [
+              { scale: textOpacity },
+              { translateY: 1 },
+            ],
+          }}>
+            <Icon name="search" style={{ marginTop: 8, marginLeft: 8, fontSize: 23, color: '#5c5c5c' }} />
             <TextInput
               style={{
+                paddingLeft: 8,
+                margin: 0,
                 height: 40,
-                borderWidth: 1,
-                borderColor: "black"
+                fontSize: 18
               }}
-              placeholder="Type here to translate!"
+              placeholder="Search"
+              placeholderTextColor="#5c5c5c"
             />
-          </View>
+          </Animated.View>
         </Animated.View>
         <ScrollView
           style={{ flex: 1 }}
@@ -452,11 +432,14 @@ class Search extends Component {
           ])}
         >
           <View>
-            <Text>Hello1</Text>
             <FlatList
+
               data={listItem}
               renderItem={({ item }) => (
-                <Text style={{ padding: 20, fontSize: 20 }}> {item} </Text>
+                <ListItem>
+                  <Text style={{ padding: 5, fontSize: 20, borderColor: '#cdcdcd', borderBottomWidth: 0.2 }}> {item} </Text>
+                </ListItem>
+
               )}
               keyExtractor={(item, index) => index.toString()}
             />
@@ -505,7 +488,7 @@ class Search extends Component {
           )}
           keyExtractor={(item, index) => index.toString()}
         /> */}
-      </Container>
+      </Container >
     );
   }
 }

@@ -1,7 +1,9 @@
 import React from "react";
+import Details from "@components/Details";
 import Profile from "@components/Profile";
 import Home from "@components/Home";
 import Login from "@components/Login";
+import Maps from "@components/Maps";
 import Register from "@components/Register";
 
 import Search from "@components/Search";
@@ -26,7 +28,7 @@ const Drawer = createDrawerNavigator(
     Login: Login,
     registerScreen: Register,
   }, {
-    initialRouteName: "profile",
+    initialRouteName: "home",
     contentOptions: {
       activeTintColor: "#e91e63"
     },
@@ -36,14 +38,16 @@ const Drawer = createDrawerNavigator(
 const RootStack = createStackNavigator(
   {
     Drawer: Drawer,
+    details: Details,
     search: Search,
     Login: Login,
     registerScreen: Register,
     tabs: TabNavigator,
-    profile: Profile
+    profile: Profile,
+    maps: Maps
   },
   {
-    initialRouteName: "search",
+    initialRouteName: "maps",
     headerMode: "none"
   }
 );
